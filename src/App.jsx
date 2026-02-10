@@ -291,7 +291,7 @@ function App() {
             <h2 className="section-title">About me</h2>
             <p className="intro-text">
               Hello, thanks for stopping by 👋
-              {' '}I'm a first-year Master's student in Industrial Design at KAIST, advised by Prof.{' '}
+              {' '}I'm a first-year Master's student in <a href="https://id.kaist.ac.kr/" target="_blank" rel="noopener noreferrer">Industrial Design at KAIST</a>, advised by Prof.{' '}
               <a href="https://takyeonlee.com/" target="_blank" rel="noopener noreferrer">Tak Yeon Lee</a> in the{' '}
               <a href="https://ai-experience-lab.github.io/" target="_blank" rel="noopener noreferrer">AI Experience Lab</a>
               {' '}and affiliated with the{' '}
