@@ -123,6 +123,27 @@ function App() {
     }, 3000);
   };
 
+  useEffect(() => {
+    // Smooth scroll for anchor links
+    const nav = document.querySelector('.header-nav');
+    if (!nav) return;
+    const handleClick = (e) => {
+      if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const id = e.target.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          window.scrollTo({
+            top: el.getBoundingClientRect().top + window.scrollY - 64,
+            behavior: 'smooth',
+          });
+        }
+      }
+    };
+    nav.addEventListener('click', handleClick);
+    return () => nav.removeEventListener('click', handleClick);
+  }, []);
+
   return (
     <>
       {/* ─── Header ─── */}
