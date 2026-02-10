@@ -1,0 +1,120 @@
+.chat-message {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    animation: messageSlideIn 0.3s ease;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-message.user {
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+.avatar-emoji {
+    font-size: 1.25rem;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+}
+
+.chat-message.ai .message-bubble {
+    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+}
+
+.chat-message.user .message-bubble {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+}
+
+.message-content {
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.message-content p {
+    margin: 0;
+    color: inherit;
+}
+
+.message-content p:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+.message-content p:empty {
+    height: 0.5rem;
+}
+
+.message-content strong {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.chat-message.user .message-content strong {
+    color: white;
+}
+
+.typing-cursor {
+    display: inline-block;
+    animation: blink 0.8s infinite;
+    color: var(--accent-primary);
+    font-weight: 300;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .message-bubble {
+        max-width: 85%;
+        padding: 0.875rem 1rem;
+    }
+
+    .message-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .avatar-emoji {
+        font-size: 1.1rem;
+    }
+}

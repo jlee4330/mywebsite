@@ -1,0 +1,159 @@
+/* ─── Research Scope: Venn Diagram ─── */
+.research-scope {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 1.5rem;
+}
+
+/* ── Venn Container ── */
+.venn-container {
+    position: relative;
+    width: 320px;
+    height: 290px;
+}
+
+/* Circles */
+.venn-circle {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.venn-circle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    pointer-events: none;
+    gap: 0.2rem;
+    padding: 0 1rem;
+}
+
+.venn-circle--design {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(59, 130, 246, 0.08);
+    border: 1.5px solid rgba(59, 130, 246, 0.25);
+}
+
+.venn-circle--hci {
+    bottom: 0;
+    left: 0;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1.5px solid rgba(139, 92, 246, 0.25);
+}
+
+.venn-circle--ai {
+    bottom: 0;
+    right: 0;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1.5px solid rgba(16, 185, 129, 0.25);
+}
+
+.venn-label {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.venn-circle--design .venn-label {
+    color: #3b82f6;
+}
+
+.venn-circle--hci .venn-label {
+    color: #7c3aed;
+}
+
+.venn-circle--ai .venn-label {
+    color: #059669;
+}
+
+.venn-rationale {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    max-width: 110px;
+}
+
+/* Position rationale text outside the overlap */
+.venn-circle--design .venn-circle-content {
+    margin-bottom: 3.5rem;
+}
+
+.venn-circle--hci .venn-circle-content {
+    margin-bottom: 3rem;
+    margin-right: 3rem;
+}
+
+.venn-circle--ai .venn-circle-content {
+    margin-bottom: 3rem;
+    margin-left: 3rem;
+}
+
+/* ── Center Intersection ── */
+.venn-intersection {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.15),
+            rgba(139, 92, 246, 0.15),
+            rgba(16, 185, 129, 0.15));
+    border: 2px solid rgba(99, 102, 241, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: intersection-pulse 3s ease-in-out infinite;
+    z-index: 5;
+}
+
+.venn-intersection-label {
+    font-family: var(--font-heading);
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: #6366f1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.2;
+}
+
+@keyframes intersection-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.15);
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .venn-container {
+        width: 260px;
+        height: 240px;
+    }
+
+    .venn-circle {
+        width: 140px;
+        height: 140px;
+    }
+}

@@ -1,0 +1,143 @@
+/* TokenizedText - Minimal Academic Style */
+
+.tokenized-text {
+    position: relative;
+    display: inline;
+    cursor: pointer;
+}
+
+/* Original text - visible by default */
+.original-text {
+    display: inline;
+    transition: opacity var(--transition-fast);
+    border-bottom: 1px dashed var(--text-muted);
+}
+
+.tokenized-text:hover .original-text {
+    border-bottom-color: var(--text-primary);
+}
+
+.tokenized-text.tokenized .original-text {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Tokens container */
+.tokens-container {
+    display: none;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: baseline;
+}
+
+.tokenized-text.tokenized .tokens-container {
+    display: inline-flex;
+}
+
+/* Individual token */
+.token {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.1em 0.25em;
+    background: var(--accent-muted);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    animation: token-appear 0.2s ease forwards;
+    animation-delay: var(--token-delay);
+    opacity: 0;
+}
+
+@keyframes token-appear {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Token text */
+.token-text {
+    color: var(--text-primary);
+    font-size: inherit;
+    line-height: 1.3;
+}
+
+.token-number .token-text {
+    color: var(--token-number);
+}
+
+.token-special .token-text {
+    color: var(--token-special);
+}
+
+.token-space {
+    background: transparent;
+    border-color: transparent;
+    padding: 0.1em 0.1em;
+}
+
+.token-space .token-text {
+    color: var(--text-muted);
+    font-size: 0.7em;
+}
+
+/* Token metadata */
+.token-meta {
+    display: flex;
+    gap: 2px;
+    margin-top: 2px;
+}
+
+.token-id {
+    font-size: 0.5em;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* Hover */
+.token:hover {
+    background: var(--border-subtle);
+}
+
+/* Tooltip */
+.token-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.5rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tooltip-label {
+    color: var(--text-muted);
+}
+
+.tooltip-value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .token-meta,
+    .token-tooltip {
+        display: none;
+    }
+}

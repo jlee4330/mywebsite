@@ -1,0 +1,59 @@
+.philosophy {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.philosophy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.philosophy-item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: var(--delay);
+}
+
+.philosophy-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.philosophy-item:last-child {
+    border-bottom: none;
+}
+
+.item-number {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    padding-top: 0.125rem;
+}
+
+.item-content {
+    max-width: 600px;
+}
+
+.item-title {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.item-description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 640px) {
+    .philosophy-item {
+        grid-template-columns: 2rem 1fr;
+        gap: 1rem;
+    }
+}
