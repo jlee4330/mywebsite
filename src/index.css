@@ -279,7 +279,6 @@ a:hover {
   border-radius: 50% / 45%;
   object-fit: cover;
   object-position: top;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .crossfade-prev {
@@ -367,7 +366,7 @@ a:hover {
   */
   clip-path: path('M0,4 Q0,0 4,0 L64,0 L64,10 A7,7 0 0,1 64,24 L64,34 L4,34 Q0,34 0,30 Z');
   padding: 0 22px 0 10px;
-  margin-right: 3px;
+  margin-right: -10px;
   animation: piece-fall-left 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
 }
 
@@ -411,7 +410,7 @@ a:hover {
    HOVER: Tabs slide into HCI's slots
    ══════════════════════════════════════ */
 .puzzle-group:hover .label-design {
-  margin-right: -12px;
+  margin-right: -18px;
   filter: drop-shadow(0 3px 10px rgba(96, 165, 250, 0.5));
 }
 
@@ -495,7 +494,7 @@ a:hover {
   0% {
     transform: translateY(-60px) rotate(-12deg);
     opacity: 0;
-    margin-right: 3px;
+    margin-right: -10px;
     filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
   }
 
@@ -506,34 +505,33 @@ a:hover {
   /* land */
   35% {
     transform: translateY(3px) rotate(1deg);
-    margin-right: 3px;
+    margin-right: -10px;
     filter: drop-shadow(0 4px 12px rgba(96, 165, 250, 0.4));
   }
 
   /* settle at rest position */
   42% {
     transform: translateY(0) rotate(0deg);
-    margin-right: 3px;
+    margin-right: -10px;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
   }
 
   /* snap together */
   55% {
-    margin-right: -12px;
+    margin-right: -18px;
     transform: translateY(0) rotate(0deg);
     filter: drop-shadow(0 3px 12px rgba(96, 165, 250, 0.6));
   }
 
   /* hold snapped */
   70% {
-    margin-right: -12px;
+    margin-right: -18px;
     transform: translateY(0) rotate(0deg);
     filter: drop-shadow(0 3px 12px rgba(96, 165, 250, 0.6));
   }
 
-  /* release back */
   90% {
-    margin-right: 3px;
+    margin-right: -10px;
     transform: translateY(0) rotate(0deg);
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
   }
@@ -541,7 +539,7 @@ a:hover {
   100% {
     transform: translateY(0) rotate(0deg);
     opacity: 1;
-    margin-right: 3px;
+    margin-right: -10px;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
   }
 }
