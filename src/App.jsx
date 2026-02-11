@@ -37,7 +37,7 @@ const publications = [
     tag: 'C.1',
     title: 'Pokemon Color Adjustments for Augmented Reality Contents',
     authors: ['Donggun Lee', 'Taesu Kim', 'Hyeon-Jeong Suk'],
-    venue: "IS&T International Symposium on Electronic Imaging (EI 2022)",
+    venue: "Electronic Imaging (IS&T International Symposium on Electronic Imaging 2022)",
     links: [
       { label: 'DOI', url: 'https://doi.org/10.2352/EI.2022.34.15.COLOR-377' },
       { label: 'PDF', url: '/pokemon.pdf' },
