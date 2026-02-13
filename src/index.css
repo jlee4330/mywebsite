@@ -868,6 +868,11 @@ a:hover {
 .site-footer p {
   font-size: 0.8rem;
   color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.site-footer p:last-child {
+  margin-bottom: 0;
 }
 
 /* ─── Main Content ─── */

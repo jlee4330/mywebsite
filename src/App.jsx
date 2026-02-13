@@ -441,7 +441,8 @@ function App() {
       </div>
 
       <footer className="site-footer">
-        <p>© Donggun Lee · Last updated February 2026</p>
+        <p>Copyright © 2026 Donggun Lee. All Rights Reserved. The website was designed by Donggun Lee and built with React.js.</p>
+        <p>Acknowledgements: The design of this website was inspired by multiple other wonderful personal websites (incl. <a href="https://inhwasong.com/" target="_blank" rel="noopener noreferrer">[1]</a>, <a href="https://taewankim.io/" target="_blank" rel="noopener noreferrer">[2]</a>, <a href="https://jaeyoungchoi1.github.io/" target="_blank" rel="noopener noreferrer">[3]</a>)</p>
       </footer>
     </>
   );
