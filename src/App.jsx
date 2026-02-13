@@ -180,7 +180,7 @@ function App() {
             <a href="#about">About</a>
             <a href="#publications">Publications</a>
             <a href="#projects">Projects</a>
-            <a href="/CV.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+            <a href="/Donggun Lee_CV.pdf" target="_blank" rel="noopener noreferrer">CV</a>
           </nav>
         </div>
       </header>
@@ -383,7 +383,7 @@ function App() {
             {/* Hey Mirror */}
             <div className="project-entry">
               <h3 className="project-title">Hey Mirror: Designing an Emotional Interaction Mirror Based on Large Language Models <a href="https://www.shinsegae.com/store/cns/cns.do?storeCd=SC00060&cnsNb=2#focus_move" target="_blank" rel="noopener noreferrer" className="project-exhibit-badge">Exhibited in SHINSEGAE NEXPERIUM</a></h3>
-              <p className="project-authors"><span className="me">Donggun Lee</span>, Chang Hee Lee</p>
+              <p className="project-authors"><span className="me">Donggun Lee</span></p>
               <p className="project-desc">
                 A working LLM-powered smart mirror for real-time conversational emotional support, inspired by Snow White's magic mirror.
               </p>

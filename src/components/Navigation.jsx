@@ -64,10 +64,10 @@ export default function Navigation() {
                         {item.isLink ? (
                             <a
                                 className="nav-link"
-                                href="#"
+                                href="/Donggun Lee_CV.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={(e) => { e.preventDefault(); setMenuOpen(false); }}
+                                onClick={() => setMenuOpen(false)}
                             >
                                 {item.label}
                             </a>
@@ -81,9 +81,9 @@ export default function Navigation() {
                         )}
                     </li>
                 ))}
-                    </li>
+            </li>
                 ))}
-            </ul>
-        </nav>
+        </ul>
+        </nav >
     );
 }
