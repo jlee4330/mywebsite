@@ -3,6 +3,17 @@ import './Research.css';
 
 const publications = [
     {
+        id: 'C2',
+        tag: 'C.2',
+        title: 'Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition',
+        authors: 'Jae Young Choi, Seon Gyeom Kim, Hyungjun Yoon, Taeckyung Lee, Donggun Lee, Jaeryung Chung, Jihyung Kil, Ryan Rossi, Sung-Ju Lee, Tak Yeon Lee',
+        venue: 'IEEE PacificVis 2026',
+        venueDetail: 'to appear',
+        type: 'Conference',
+        year: 2026,
+        links: { paper: '/Evaluating Visual Prompts with Eye-Tracking Data for MLLM–Based Human Activity Recognition.pdf' },
+    },
+    {
         id: 'J4',
         tag: 'J.4',
         title: 'Creating Text-Based AI Clones of Myself: Exploring Perceptions, Development Strategies, and Challenges',
@@ -35,12 +46,13 @@ const publications = [
         year: 2025,
         links: { paper: '#' },
     },
+
     {
         id: 'C1',
         tag: 'C.1',
         title: 'Pokemon Color Adjustments for Augmented Reality Contents',
         authors: 'Donggun Lee, Taesu Kim, Hyeon-Jeong Suk',
-            venue: "Electronic Imaging (IS&T International Symposium on Electronic Imaging 2022)",
+        venue: "Electronic Imaging (IS&T International Symposium on Electronic Imaging 2022)",
         venueDetail: '',
         type: 'Conference',
         year: 2022,

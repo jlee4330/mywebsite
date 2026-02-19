@@ -13,6 +13,13 @@ const newsItems = [
 
 const publications = [
   {
+    tag: 'C.2',
+    title: 'Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition',
+    authors: ['Jae Young Choi', 'Seon Gyeom Kim', 'Hyungjun Yoon', 'Taeckyung Lee', 'Donggun Lee', 'Jaeryung Chung', 'Jihyung Kil', 'Ryan Rossi', 'Sung-Ju Lee', 'Tak Yeon Lee'],
+    venue: 'IEEE PacificVis 2026 (to appear)',
+    links: [{ label: 'PDF', url: '/Evaluating Visual Prompts with Eye-Tracking Data for MLLM–Based Human Activity Recognition.pdf' }],
+  },
+  {
     tag: 'J.4',
     title: 'Creating Text-Based AI Clones of Myself: Exploring Perceptions, Development Strategies, and Challenges',
     authors: ['Donggun Lee*', 'Suyoun Lee*', 'Hyunseung Lim', 'Hwajung Hong'],
@@ -33,6 +40,7 @@ const publications = [
     venue: 'Korean Journal of Meditation 2025, Vol. 15, No. 1, pp.105-117',
     links: [{ label: 'DOI', url: 'https://doi.org/10.23250/kjm.15.1.202502.006' }, { label: 'PDF', url: '/med.pdf' }],
   },
+
   {
     tag: 'C.1',
     title: 'Pokemon Color Adjustments for Augmented Reality Contents',
@@ -59,8 +67,8 @@ function renderAuthors(authors) {
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
-  const [profilePhoto, setProfilePhoto] = useState('/donggun1.png');
-  const [prevPhoto, setPrevPhoto] = useState('/donggun1.png');
+  const [profilePhoto, setProfilePhoto] = useState('/donggun3.png');
+  const [prevPhoto, setPrevPhoto] = useState('/donggun3.png');
   const [photoFading, setPhotoFading] = useState(false);
   const photoTimerRef = useRef(null);
   const puzzleRef = useRef(null);
@@ -114,10 +122,10 @@ function App() {
     }, 400);
     photoTimerRef.current = setTimeout(() => {
       setPrevPhoto(src);
-      setProfilePhoto('/donggun1.png');
+      setProfilePhoto('/donggun3.png');
       setPhotoFading(true);
       setTimeout(() => {
-        setPrevPhoto('/donggun1.png');
+        setPrevPhoto('/donggun3.png');
         setPhotoFading(false);
       }, 400);
     }, 3000);
@@ -148,6 +156,11 @@ function App() {
     <>
       {/* ─── Header ─── */}
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
+        <div className="header-sparkles">
+          {[...Array(8)].map((_, i) => (
+            <span key={i} className="sparkle" style={{ '--i': i }} />
+          ))}
+        </div>
         <div className="header-inner">
           <a href="#" className="header-name">
             <svg className="header-logo" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">
