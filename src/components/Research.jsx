@@ -3,6 +3,17 @@ import './Research.css';
 
 const publications = [
     {
+        id: 'P1',
+        tag: 'P.1',
+        title: 'One Is Not Enough: How People Use Multiple AI Models in Everyday Life',
+        authors: 'Seunghwa Pyo*, Donggun Lee*, Jungwoo Rhee*, Soobin Park, Youn-kyung Lim',
+        venue: 'CHI 2026 Posters',
+        venueDetail: 'to appear',
+        type: 'Poster',
+        year: 2026,
+        links: {},
+    },
+    {
         id: 'C2',
         tag: 'C.2',
         title: 'Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition',

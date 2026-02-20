@@ -1214,7 +1214,7 @@ a:hover {
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding: 2rem 1.5rem 1.5rem;
+    padding: 2rem 1.5rem 2.5rem;
     flex-direction: column;
     align-items: center;
     gap: 0;
@@ -1245,27 +1245,34 @@ a:hover {
   .puzzle-group {
     top: -2px;
     height: 36px;
-    transform: translateX(-50%) scale(0.85);
+    transform: translateX(-50%) scale(0.82);
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 
   .floating-label {
     font-size: 0.58rem;
     height: 28px;
+    flex-shrink: 0;
   }
 
   .label-design {
     width: 70px;
     padding: 0 18px 0 8px;
+    margin-right: -18px;
   }
 
   .label-hci {
     width: 60px;
     padding: 0 10px;
+    margin-left: -4px;
+    margin-right: -4px;
   }
 
   .label-ai {
     width: 48px;
     padding: 0 8px 0 15px;
+    margin-left: -12px;
   }
 
   /* ── Sidebar Info ── */
@@ -1345,6 +1352,7 @@ a:hover {
     padding: 1.5rem 1.25rem 2rem;
   }
 
+
   .section-title {
     font-size: 1.5rem;
   }
@@ -1422,7 +1430,9 @@ a:hover {
   }
 
   .puzzle-group {
-    transform: translateX(-50%) scale(0.75);
+    transform: translateX(-50%) scale(0.7);
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 
   .main-content {

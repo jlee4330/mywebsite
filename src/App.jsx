@@ -3,15 +3,23 @@ import './index.css';
 import ResearchScope from './components/ResearchScope';
 
 const newsItems = [
+  { date: '2026.02', text: <>First-authored poster, "One Is Not Enough: How People Use Multiple AI Models in Everyday Life," is conditionally accepted to <strong>CHI 2026 Posters</strong> 🎉 Huge thanks to Seunghwa and <a href="https://jungwoorhee.com/" target="_blank" rel="noopener noreferrer">Jungwoo</a>!</> },
   { date: '2026.02', text: <>Our paper, "Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition," is accepted to <strong>IEEE PacificVis 2026</strong> 📄✨ Big congratulations to <a href="https://jaeyoungchoi1.github.io/" target="_blank" rel="noopener noreferrer">JaeYoung</a>!</> },
   { date: '2026.01', text: <>Attend <strong>HCI Korea 2026</strong> 🇰🇷</> },
-  { date: '2026.01', text: <>Submit one poster to <strong>CHI 2026</strong> 🤞 Submit two full papers to <strong>DIS 2026</strong> 🤞</> },
+  { date: '2026.01', text: <>Submit two full papers to <strong>DIS 2026</strong> 🤞</> },
   { date: '2025.11', text: <>Attend the <strong>IEEE VIS 2025</strong> conference in Vienna 🎨📊</> },
   { date: '2025.11', text: <>First-authored paper, "Creating Text-Based AI Clones of Myself," is accepted to <strong>IJHCS</strong> 📘</> },
   { date: '2025.05', text: <>Attend <strong>CHI 2025</strong> in Yokohama 🌍✨</> },
 ];
 
 const publications = [
+  {
+    tag: 'P.1',
+    title: 'One Is Not Enough: How People Use Multiple AI Models in Everyday Life',
+    authors: ['Seunghwa Pyo*', 'Donggun Lee*', 'Jungwoo Rhee*', 'Soobin Park', 'Youn-kyung Lim'],
+    venue: 'CHI 2026 Posters (to appear)',
+    links: [],
+  },
   {
     tag: 'C.2',
     title: 'Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition',
