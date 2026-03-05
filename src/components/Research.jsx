@@ -11,6 +11,7 @@ const publications = [
         venueDetail: 'to appear',
         type: 'Poster',
         year: 2026,
+        teaser: '/chiposter26.png',
         links: {},
     },
     {
@@ -22,6 +23,7 @@ const publications = [
         venueDetail: 'to appear',
         type: 'Conference',
         year: 2026,
+        teaser: '/pacificvis26.png',
         links: { paper: '/Evaluating Visual Prompts with Eye-Tracking Data for MLLM–Based Human Activity Recognition.pdf' },
     },
     {
@@ -33,6 +35,7 @@ const publications = [
         venueDetail: 'Special Issue "AI-Generated Personas: Representing User Needs with Generative AI Models"',
         type: 'Journal',
         year: 2025,
+        teaser: '/ijhcs4_web.jpg',
         links: {},
     },
     {
@@ -44,6 +47,7 @@ const publications = [
         venueDetail: 'Under Revision',
         type: 'Journal',
         year: 2025,
+        teaser: '/Immersive.jpg',
         links: {},
     },
     {
@@ -55,6 +59,7 @@ const publications = [
         venueDetail: '',
         type: 'Journal',
         year: 2025,
+        teaser: '/meditation.jpg',
         links: { paper: '#' },
     },
 
@@ -67,6 +72,7 @@ const publications = [
         venueDetail: '',
         type: 'Conference',
         year: 2022,
+        teaser: '/EI2022.png',
         links: { paper: '#' },
     },
 ];
@@ -127,22 +133,33 @@ export default function Research() {
                             className="publication-item"
                             style={{ '--delay': `${index * 0.1}s` }}
                         >
-                            <div className="pub-meta">
-                                <span className="pub-tag-label">[{pub.tag}]</span>
-                                <span className="pub-type">{pub.type}</span>
-                            </div>
-                            <h3 className="pub-title">{pub.title}</h3>
-                            <p className="pub-authors">{pub.authors}</p>
-                            <p className="pub-venue-detail">
-                                {pub.venue}
-                                {pub.venueDetail && <span className="pub-venue-extra"> — {pub.venueDetail}</span>}
-                            </p>
-                            {Object.keys(pub.links).length > 0 && (
-                                <div className="pub-links">
-                                    {pub.links.paper && <a href={pub.links.paper} className="pub-link">PDF</a>}
-                                    {pub.links.video && <a href={pub.links.video} className="pub-link">Video</a>}
+                            {pub.teaser && (
+                                <div className="pub-teaser">
+                                    <img
+                                        src={pub.teaser}
+                                        alt={`${pub.title} teaser`}
+                                        style={pub.teaser === '/ijhcs4_web.jpg' ? { transform: 'scale(1.8) translateX(-8%) translateY(8%)' } : {}}
+                                    />
                                 </div>
                             )}
+                            <div className="pub-content">
+                                <div className="pub-meta">
+                                    <span className="pub-tag-label">[{pub.tag}]</span>
+                                    <span className="pub-type">{pub.type}</span>
+                                </div>
+                                <h3 className="pub-title">{pub.title}</h3>
+                                <p className="pub-authors">{pub.authors}</p>
+                                <p className="pub-venue-detail">
+                                    {pub.venue}
+                                    {pub.venueDetail && <span className="pub-venue-extra"> — {pub.venueDetail}</span>}
+                                </p>
+                                {Object.keys(pub.links).length > 0 && (
+                                    <div className="pub-links">
+                                        {pub.links.paper && <a href={pub.links.paper} className="pub-link">PDF</a>}
+                                        {pub.links.video && <a href={pub.links.video} className="pub-link">Video</a>}
+                                    </div>
+                                )}
+                            </div>
                         </article>
                     ))}
                 </div>

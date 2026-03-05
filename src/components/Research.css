@@ -17,11 +17,35 @@
     transform: translateY(15px);
     transition: opacity 0.5s ease, transform 0.5s ease;
     transition-delay: var(--delay);
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
 }
 
 .publication-item.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.pub-teaser {
+    flex-shrink: 0;
+    width: 200px;
+    height: 130px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-tertiary);
+}
+
+.pub-teaser img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pub-content {
+    flex: 1;
+    min-width: 0;
 }
 
 .pub-meta {
@@ -148,5 +172,10 @@
 @media (max-width: 640px) {
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pub-teaser {
+        width: 150px;
+        height: 95px;
     }
 }

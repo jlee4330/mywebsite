@@ -18,6 +18,7 @@ const publications = [
     title: 'One Is Not Enough: How People Use Multiple AI Models in Everyday Life',
     authors: ['Seunghwa Pyo*', 'Donggun Lee*', 'Jungwoo Rhee*', 'Soobin Park', 'Youn-kyung Lim'],
     venue: 'CHI 2026 Posters (to appear)',
+    teaser: '/chiposter26.png',
     links: [],
   },
   {
@@ -25,6 +26,7 @@ const publications = [
     title: 'Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition',
     authors: ['Jae Young Choi', 'Seon Gyeom Kim', 'Hyungjun Yoon', 'Taeckyung Lee', 'Donggun Lee', 'Jaeryung Chung', 'Jihyung Kil', 'Ryan Rossi', 'Sung-Ju Lee', 'Tak Yeon Lee'],
     venue: 'IEEE PacificVis 2026 (to appear)',
+    teaser: '/pacificvis26.png',
     links: [{ label: 'PDF', url: '/Evaluating Visual Prompts with Eye-Tracking Data for MLLM–Based Human Activity Recognition.pdf' }],
   },
   {
@@ -32,6 +34,7 @@ const publications = [
     title: 'Creating Text-Based AI Clones of Myself: Exploring Perceptions, Development Strategies, and Challenges',
     authors: ['Donggun Lee*', 'Suyoun Lee*', 'Hyunseung Lim', 'Hwajung Hong'],
     venue: 'International Journal of Human–Computer Studies (IJHCS), 103692. Special Issue: "AI-Generated Personas: Representing User Needs with Generative AI Models."',
+    teaser: '/ijhcs4_web.jpg',
     links: [{ label: 'DOI', url: 'https://doi.org/10.1016/j.ijhcs.2025.103692' }, { label: 'PDF', url: '/clone.pdf' }],
   },
   {
@@ -39,6 +42,7 @@ const publications = [
     title: 'Understanding the Impact of Spatial Immersion in Web Data Stories',
     authors: ['SeonGyeom Kim', 'Juhyeong Park', 'Yutaek Song', 'Donggun Lee', 'Yubin Lee', 'Ryan Rossi', 'Jane Hoffswell', 'Eunyee Koh', 'Tak Yeon Lee'],
     venue: 'Preprint (Under Revision)',
+    teaser: '/Immersive.jpg',
     links: [{ label: 'DOI', url: 'https://doi.org/10.48550/arXiv.2411.18049' }, { label: 'PDF', url: '/ids.pdf' }],
   },
   {
@@ -46,6 +50,7 @@ const publications = [
     title: 'The Impact of a Meditation Camp on Emotional Regulation and Abstinence Intentions in Individuals with Gambling Addiction',
     authors: ['Sanghee Cho', 'Sangseong Kim', 'Donggun Lee', 'Junggi Hong', 'Eunmi Kim'],
     venue: 'Korean Journal of Meditation 2025, Vol. 15, No. 1, pp.105-117',
+    teaser: '/meditation.jpg',
     links: [{ label: 'DOI', url: 'https://doi.org/10.23250/kjm.15.1.202502.006' }, { label: 'PDF', url: '/med.pdf' }],
   },
 
@@ -54,6 +59,7 @@ const publications = [
     title: 'Pokemon Color Adjustments for Augmented Reality Contents',
     authors: ['Donggun Lee', 'Taesu Kim', 'Hyeon-Jeong Suk'],
     venue: "Electronic Imaging (IS&T International Symposium on Electronic Imaging 2022)",
+    teaser: '/EI2022.png',
     links: [
       { label: 'DOI', url: 'https://doi.org/10.2352/EI.2022.34.15.COLOR-377' },
       { label: 'PDF', url: '/pokemon.pdf' },
@@ -357,16 +363,27 @@ function App() {
             <h2 className="section-title">Publications</h2>
             {publications.map((pub, i) => (
               <div key={i} className="pub-entry">
-                <span className="pub-entry-title">{pub.title}</span>
-                <span className="pub-entry-authors">{renderAuthors(pub.authors)}</span>
-                <span className="pub-entry-venue">{pub.venue}</span>
-                {pub.links.length > 0 && (
-                  <span className="pub-entry-links">
-                    {pub.links.map((link, j) => (
-                      <a key={j} href={link.url}>{link.label}</a>
-                    ))}
-                  </span>
+                {pub.teaser && (
+                  <div className="pub-entry-teaser">
+                    <img
+                      src={pub.teaser}
+                      alt={`${pub.title} teaser`}
+                      style={pub.teaser === '/ijhcs4_web.jpg' ? { transform: 'scale(1.3) translateX(3%) translateY(1%)' } : {}}
+                    />
+                  </div>
                 )}
+                <div className="pub-entry-body">
+                  <span className="pub-entry-title">{pub.title}</span>
+                  <span className="pub-entry-authors">{renderAuthors(pub.authors)}</span>
+                  <span className="pub-entry-venue">{pub.venue}</span>
+                  {pub.links.length > 0 && (
+                    <span className="pub-entry-links">
+                      {pub.links.map((link, j) => (
+                        <a key={j} href={link.url}>{link.label}</a>
+                      ))}
+                    </span>
+                  )}
+                </div>
               </div>
             ))}
           </section>
