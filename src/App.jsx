@@ -45,7 +45,7 @@ const publications = [
     authors: ['Seunghwa Pyo*', 'Donggun Lee*', 'Jungwoo Rhee*', 'Soobin Park', 'Youn-kyung Lim'],
     venue: 'ACM CHI EA 2026',
     teaser: '/chiposter26.png',
-    links: [{ label: 'DOI', url: 'https://doi.org/10.1145/3772363.3798682' }, { label: 'PDF', url: '/3772363.3798682.pdf' }],
+    links: [{ label: 'DOI', url: 'https://doi.org/10.1145/3772363.3798682' }, { label: 'PDF', url: '/3772363.3798682.pdf' }, { label: 'Poster', url: '/Poster.pdf' }],
   },
   {
     tag: 'C.2',
