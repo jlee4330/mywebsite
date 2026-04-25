@@ -2,14 +2,23 @@ import { useState, useEffect } from 'react';
 import './index.css';
 
 const slideshowImages = [
+  { src: '/slideshow/10c55510763a4a6ee4289539a4d7b807.MP4', position: 'center center' },
   { src: '/slideshow/sing.png', position: 'center 53%' },
   { src: '/slideshow/3vis.JPG', position: 'center 60%' },
+  { src: '/slideshow/IMG_9450.jpg', position: 'center center' },
+  { src: '/slideshow/dxd.jpg', position: 'center 50%' },
+  { src: '/slideshow/chi2026.JPG', position: 'center center' },
+  { src: '/slideshow/dxd2.JPG', position: 'center center' },
+  { src: '/slideshow/IMG_0039.JPG', position: 'center center' },
+  { src: '/slideshow/IMG_2775.JPG', position: 'center center' },
   { src: '/slideshow/2vis.jpg', position: 'center 30%' },
   { src: '/slideshow/tennis.jpg', position: 'center 80%' },
   { src: '/slideshow/4ael_christmas_party.JPG', position: 'center 10%' },
   { src: '/slideshow/IMG_4166.jpg', position: 'center 30%' },
   { src: '/slideshow/6.png', position: 'center 55%' },
-  { src: '/slideshow/7.jpg', position: 'center -23%' }
+  { src: '/slideshow/7.jpg', position: 'center -23%' },
+
+
 ];
 
 const newsItems = [
@@ -108,6 +117,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('about');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -121,10 +131,14 @@ function App() {
     if (activeTab === 'about') {
       const interval = setInterval(() => {
         setCurrentImageIndex((prev) => (prev + 1) % slideshowImages.length);
-      }, 5000);
+      }, 15000);
       return () => clearInterval(interval);
     }
-  }, [activeTab]);
+  }, [activeTab, currentImageIndex]);
+
+  useEffect(() => {
+    setIsVideoMuted(true);
+  }, [currentImageIndex]);
 
   return (
     <div className="container">
@@ -162,7 +176,7 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
             </a>
           </div>
-          <button 
+          <button
             className="dark-mode-toggle"
             onClick={() => setIsDarkMode(!isDarkMode)}
             style={{
@@ -199,21 +213,128 @@ function App() {
           {activeTab === 'about' && (
             <>
               <div className="hero-image-container">
-                {slideshowImages.map((image, index) => (
-                  <img
-                    key={image.src}
-                    src={image.src}
-                    alt={`Hero ${index}`}
-                    className="hero-image"
-                    style={{
-                      opacity: index === currentImageIndex ? 1 : 0,
-                      zIndex: index === currentImageIndex ? 1 : 0,
-                      objectPosition: image.position,
-                      transform: image.scale ? `scale(${image.scale})` : undefined,
-                      objectFit: image.fit || 'cover'
+                {slideshowImages.map((image, index) => {
+                  const isVideo = image.src.toLowerCase().endsWith('.mp4');
+                  const style = {
+                    opacity: index === currentImageIndex ? 1 : 0,
+                    zIndex: index === currentImageIndex ? 1 : 0,
+                    objectPosition: image.position,
+                    transform: image.scale ? `scale(${image.scale})` : undefined,
+                    objectFit: image.fit || 'cover'
+                  };
+
+                  return isVideo ? (
+                    <video
+                      key={image.src}
+                      src={image.src}
+                      className="hero-image"
+                      style={style}
+                      autoPlay
+                      muted={isVideoMuted}
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <img
+                      key={image.src}
+                      src={image.src}
+                      alt={`Hero ${index}`}
+                      className="hero-image"
+                      style={style}
+                    />
+                  );
+                })}
+
+                <button
+                  className="slide-nav-btn prev-btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentImageIndex((prev) => (prev === 0 ? slideshowImages.length - 1 : prev - 1));
+                  }}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '10px',
+                    transform: 'translateY(-50%)',
+                    zIndex: 10,
+                    background: 'rgba(0,0,0,0.3)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '36px',
+                    height: '36px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    backdropFilter: 'blur(4px)',
+                    transition: 'background 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.6)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.3)'}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" /></svg>
+                </button>
+                <button
+                  className="slide-nav-btn next-btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentImageIndex((prev) => (prev + 1) % slideshowImages.length);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '10px',
+                    transform: 'translateY(-50%)',
+                    zIndex: 10,
+                    background: 'rgba(0,0,0,0.3)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '36px',
+                    height: '36px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    backdropFilter: 'blur(4px)',
+                    transition: 'background 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.6)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.3)'}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" /></svg>
+                </button>
+
+                {slideshowImages[currentImageIndex]?.src.toLowerCase().endsWith('.mp4') && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsVideoMuted(!isVideoMuted);
                     }}
-                  />
-                ))}
+                    style={{
+                      position: 'absolute',
+                      bottom: '15px',
+                      right: '15px',
+                      zIndex: 10,
+                      background: 'rgba(0,0,0,0.6)',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 14px',
+                      borderRadius: '20px',
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: '500',
+                      fontFamily: 'var(--font-main)',
+                      backdropFilter: 'blur(4px)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    {isVideoMuted ? '🔇 Unmute' : '🔊 Mute'}
+                  </button>
+                )}
               </div>
               <div className="hero-caption">
                 To everyone growing and walking this path with me—thank you, 2026.
@@ -224,17 +345,17 @@ function App() {
                   <div className="profile-pic-wrapper">
                     <img src="/slideshow/donggun.png" alt="Donggun Lee" className="profile-pic" />
                   </div>
-                  
+
                   <div className="profile-quotes-container">
                     <div className="quotes-title">Inspired By</div>
-                    
+
                     <div className="profile-quote">
                       <blockquote>
                         “AI is going to be the defining technology of our times.”
                       </blockquote>
                       <cite>— Satya Nadella</cite>
                     </div>
-                    
+
                     <div className="profile-quote">
                       <blockquote>
                         “I was taught to confront things you can’t avoid. Death is one of those things.”
