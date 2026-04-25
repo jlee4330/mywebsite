@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import './index.css';
 
 const slideshowImages = [
-  { src: '/slideshow/donggun.png', position: 'center 37%' },
-  // { src: '/slideshow/IMG_4166.jpg', position: 'center 30%' },
+  { src: '/slideshow/sing.png', position: 'center 53%' },
   { src: '/slideshow/3vis.JPG', position: 'center 60%' },
   { src: '/slideshow/2vis.jpg', position: 'center 30%' },
+  { src: '/slideshow/tennis.jpg', position: 'center 80%' },
   { src: '/slideshow/4ael_christmas_party.JPG', position: 'center 10%' },
-  //{ src: '/slideshow/dj.png', position: 'center 50%', fit: 'contain' },
-  { src: '/slideshow/sing.png', position: 'center 53%' },
-  { src: '/slideshow/tennis.jpg', position: 'center 80%' }
+  { src: '/slideshow/IMG_4166.jpg', position: 'center 30%' },
+  { src: '/slideshow/6.png', position: 'center 55%' },
+  { src: '/slideshow/7.jpg', position: 'center -23%' }
 ];
 
 const newsItems = [
@@ -107,6 +107,15 @@ function renderAuthors(authors) {
 function App() {
   const [activeTab, setActiveTab] = useState('about');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     if (activeTab === 'about') {
@@ -122,13 +131,23 @@ function App() {
       {/* Header */}
       <header className="top-header">
         <div className="header-brand-section">
-          <a href="#" className="brand-logo">
-            <strong>Donggun</strong> Lee<span className="logo-dot">.</span>
-          </a>
-          <span className="brand-affiliation">HCI @ KAIST</span>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <a href="#about" className="brand-logo" onClick={(e) => { e.preventDefault(); setActiveTab('about'); }}>
+              <strong>Donggun</strong> Lee
+              <span className="logo-dot">
+                .
+                <div className="logo-venn-bg">
+                  <div className="venn-circle-bg left-circle"></div>
+                  <div className="venn-circle-bg right-circle"></div>
+                  <span className="venn-label label-left">Design (+HCI)</span>
+                  <span className="venn-label label-right">AI</span>
+                </div>
+              </span>
+            </a>
+          </div>
         </div>
 
-        <div className="header-actions-section">
+        <div className="header-actions-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
           <div className="social-icons">
             <a href="https://scholar.google.com/citations?user=JoR4t6YAAAAJ&hl=ko" target="_blank" rel="noopener noreferrer" title="Google Scholar" aria-label="Google Scholar">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" /></svg>
@@ -143,6 +162,23 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
             </a>
           </div>
+          <button 
+            className="dark-mode-toggle"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--text-muted)',
+              fontSize: '11px',
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              padding: 0,
+              fontFamily: 'inherit',
+              letterSpacing: '0.02em'
+            }}
+          >
+            {isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          </button>
         </div>
       </header>
 
@@ -180,20 +216,45 @@ function App() {
                 ))}
               </div>
               <div className="hero-caption">
-                Grateful for everyone who makes 2026 so wonderful.
+                To everyone growing and walking this path with me—thank you, 2026.
               </div>
 
               <div className="bio-section">
-                <div className="bio-text">
-                  <p>
-                    I am a first-year Master’s student in <a href="https://id.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Industrial Design at KAIST</a>, advised by Prof. <a href="https://takyeonlee.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Tak Yeon Lee</a> in the <a href="https://ai-experience-lab.github.io/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>AI Experience Lab</a> and affiliated with the <a href="https://hci.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>HCI@KAIST</a> and <a href="https://ai4good.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>AI4GOOD@KAIST</a> communities. Earlier in my academic journey, I was fortunate to be mentored by Prof. <a href="https://galaxytourist.notion.site/Hwajung-Hong-cc10b0291bbe4ca38dbf4882cd687423" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Hwajung Hong</a>, whose guidance has been deeply influential in shaping my perspective as a researcher.
-                  </p>
-                  <p>
-                    My research lies at the intersection of human–AI interaction and design. I view AI not simply as a tool, but as a design material to be examined, shaped, and negotiated through practice. Recently, my interests have shifted toward multi-agent systems, with a focus on how people can monitor, guide, and provide feedback to AI agents in collaborative workflows.
-                  </p>
-                  <p>
-                    Outside of research, I enjoy tennis 🎾, football ⚽, singing 🎤, and DJing 🎧. I also love experimenting with new ideas, tools, and creative practices.
-                  </p>
+                <div className="bio-image-container">
+                  <div className="profile-pic-wrapper">
+                    <img src="/slideshow/donggun.png" alt="Donggun Lee" className="profile-pic" />
+                  </div>
+                  
+                  <div className="profile-quotes-container">
+                    <div className="quotes-title">Inspired By</div>
+                    
+                    <div className="profile-quote">
+                      <blockquote>
+                        “AI is going to be the defining technology of our times.”
+                      </blockquote>
+                      <cite>— Satya Nadella</cite>
+                    </div>
+                    
+                    <div className="profile-quote">
+                      <blockquote>
+                        “I was taught to confront things you can’t avoid. Death is one of those things.”
+                      </blockquote>
+                      <cite>— Damien Hirst</cite>
+                    </div>
+                  </div>
+                </div>
+                <div className="bio-content">
+                  <div className="bio-text">
+                    <p>
+                      I am a first-year Master’s student in <a href="https://id.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Industrial Design at KAIST</a>, advised by Prof. <a href="https://takyeonlee.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Tak Yeon Lee</a> in the <a href="https://ai-experience-lab.github.io/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>AI Experience Lab</a> and affiliated with the <a href="https://hci.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>HCI@KAIST</a> and <a href="https://ai4good.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>AI4GOOD@KAIST</a> communities. Earlier in my academic journey, I was fortunate to be mentored by Prof. <a href="https://galaxytourist.notion.site/Hwajung-Hong-cc10b0291bbe4ca38dbf4882cd687423" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Hwajung Hong</a>, whose guidance has been deeply influential in shaping my perspective as a researcher.
+                    </p>
+                    <p>
+                      My research lies at the intersection of human–AI interaction and design. I view AI not simply as a tool, but as a design material to be examined, shaped, and negotiated through practice. Recently, my interests have shifted toward multi-agent systems, with a focus on how people can monitor, guide, and provide feedback to AI agents in collaborative workflows.
+                    </p>
+                    <p>
+                      Outside of research, I enjoy tennis 🎾, football ⚽, singing 🎤, and DJing 🎧. I also love experimenting with new ideas, tools, and creative practices.
+                    </p>
+                  </div>
                 </div>
               </div>
             </>
@@ -352,6 +413,9 @@ function App() {
 
       <footer className="site-footer">
         <p>Copyright © 2026 Donggun Lee. All Rights Reserved.</p>
+        <p>
+          Acknowledgements: The design of this website was inspired by multiple other wonderful personal websites (incl. <a href="https://www.joonsungpark.com/" target="_blank" rel="noopener noreferrer">[1]</a>, <a href="https://inhwasong.com/" target="_blank" rel="noopener noreferrer">[2]</a>).
+        </p>
       </footer>
     </div>
   );
