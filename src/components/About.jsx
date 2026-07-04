@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 import './About.css';
-import profileImg from '../assets/profile.png';
-
 export default function About() {
     const sectionRef = useRef(null);
 
@@ -29,7 +27,7 @@ export default function About() {
             <div className="container about-content">
                 <div className="about-layout">
                     <div className="about-photo">
-                        <img src={profileImg} alt="이동건" className="profile-image" />
+                        <img src="/donggunlee.png" alt="이동건" className="profile-image" />
                     </div>
 
                     <div className="about-info">

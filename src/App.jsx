@@ -343,7 +343,7 @@ function App() {
               <div className="bio-section">
                 <div className="bio-image-container">
                   <div className="profile-pic-wrapper">
-                    <img src="/slideshow/donggun.png" alt="Donggun Lee" className="profile-pic" />
+                    <img src="/donggunlee.png" alt="Donggun Lee" className="profile-pic" />
                   </div>
 
                   <div className="profile-quotes-container">
