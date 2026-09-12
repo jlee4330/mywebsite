@@ -788,12 +788,6 @@ body.dark-mode .hero-image.hero-static-image {
   margin-top: 8px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  filter: grayscale(1);
-  transition: filter 0.3s ease;
-}
-
-.update-poster:hover {
-  filter: grayscale(0);
 }
 
 .update-item {
