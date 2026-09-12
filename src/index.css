@@ -818,6 +818,12 @@ body.dark-mode .hero-image.hero-static-image {
   margin-bottom: 50px;
 }
 
+.blog-loading {
+  padding: 30px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
 .blog-filter-bar {
   display: flex;
   gap: 8px;

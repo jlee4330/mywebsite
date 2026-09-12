@@ -29,12 +29,16 @@ src/
 │   └── BlogSection.jsx # 블로그 상태와 저장 로직
 ├── config/
 │   ├── site.js         # 이름, 메인 이미지, 연락처, CV, 외부 링크
-│   └── blog.js         # 블로그 저장 설정
+│   ├── blog.js         # 블로그 관리자 이메일과 컬렉션 이름
+│   └── firebase.js     # Firebase 웹 프로젝트 설정
 ├── data/
 │   ├── blogPosts.json  # 기본 블로그 글
 │   ├── news.jsx        # 뉴스
 │   ├── projects.js     # 프로젝트
 │   └── publications.js # 논문
+├── services/
+│   ├── firebase.js     # Firebase 앱, Auth, Firestore 초기화
+│   └── blogRepository.js # Firestore 블로그 읽기와 저장
 ├── App.jsx             # 페이지 조립과 탭 전환
 ├── index.css           # 공통 디자인과 반응형 스타일
 └── main.jsx            # 앱 시작점
@@ -92,12 +96,15 @@ PDF도 같은 방식으로 `public` 아래에 넣고 `/파일명.pdf` 또는 `/d
 
 ## 블로그 수정 시 주의사항
 
-관리자 화면에서 저장한 글은 브라우저의 로컬 저장소에도 남습니다. 따라서 `src/data/blogPosts.json`을 직접 바꿨는데 이전 글이 계속 보이면 해당 사이트의 `dg_blog_posts` 로컬 저장소를 삭제한 뒤 새로고침하세요.
+블로그 글은 Firebase Cloud Firestore의 `blogPosts` 컬렉션에서 실시간으로 불러옵니다. Firestore가 아직 비어 있으면 `src/data/blogPosts.json`의 기본 글을 보여주며, 관리자가 처음 저장하는 순간 기본 글도 Firestore로 이전됩니다.
 
-개발 서버에서 관리자 편집 기능을 사용하려면 프로젝트 루트에 `.env.local` 파일을 만들고 아래처럼 로컬 비밀번호를 지정하세요. 이 파일은 Git에 포함되지 않습니다.
+관리자 로그인에는 Firebase Authentication의 Email/Password 방식을 사용합니다. 관리자 이메일은 `src/config/blog.js`에서 변경할 수 있습니다. 비밀번호는 코드나 Git에 저장되지 않고 Firebase Authentication에서 관리됩니다.
 
-```text
-BLOG_ADMIN_PASSWORD=원하는-로컬-비밀번호
-```
+Firebase Console에서 다음 설정을 완료해야 합니다.
 
-로그인 성공 시 비밀번호 대신 HTTP 전용 세션 쿠키가 사용되며, 브라우저 코드나 Git 저장소에는 비밀번호가 포함되지 않습니다. 이 저장 기능은 개인 로컬 관리를 위한 개발용 방식입니다. 공개 서버에서 편집 기능을 운영하려면 별도의 서버 인증과 데이터베이스를 연결해야 합니다.
+1. Authentication에서 Email/Password 로그인 활성화
+2. `jlee4330@kaist.ac.kr` 관리자 사용자 생성
+3. Cloud Firestore 데이터베이스 생성
+4. 프로젝트 루트의 `firestore.rules` 내용을 Firebase Console의 Firestore Rules에 배포
+
+보안 규칙은 모든 방문자에게 글 읽기만 허용하고, 지정된 관리자 이메일로 로그인한 사용자에게만 작성·수정·삭제를 허용합니다.

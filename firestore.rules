@@ -1,0 +1,19 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isBlogAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'jlee4330@kaist.ac.kr';
+    }
+
+    match /blogPosts/{postId} {
+      allow read: if true;
+      allow create, update, delete: if isBlogAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

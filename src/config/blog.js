@@ -1,10 +1,5 @@
-// Blog endpoints are served by the local Vite development server.
-// The password itself lives only in the ignored .env.local file.
+// Public blog settings. Authentication credentials are managed by Firebase Auth.
 export const BLOG_CONFIG = {
-  adminStorageKey: 'dg_blog_admin',
-  postsStorageKey: 'dg_blog_posts',
-  loginEndpoint: '/api/blog-login',
-  logoutEndpoint: '/api/blog-logout',
-  saveEndpoint: '/api/save-posts',
-  postsFile: 'src/data/blogPosts.json',
+  adminEmail: 'jlee4330@kaist.ac.kr',
+  postsCollection: 'blogPosts',
 };

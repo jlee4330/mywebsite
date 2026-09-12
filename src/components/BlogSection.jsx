@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { BLOG_CONFIG } from '../config/blog.js';
 import initialPosts from '../data/blogPosts.json';
+import { replaceBlogPosts, subscribeToBlogPosts } from '../services/blogRepository.js';
+import { firebaseAuth } from '../services/firebase.js';
 import BlogEditor from './blog/BlogEditor.jsx';
 import BlogPostDetail from './blog/BlogPostDetail.jsx';
 import BlogPostList from './blog/BlogPostList.jsx';
@@ -19,25 +22,10 @@ function createEmptyPost() {
   };
 }
 
-function loadPosts() {
-  try {
-    const savedPosts = localStorage.getItem(BLOG_CONFIG.postsStorageKey);
-    if (savedPosts) {
-      const parsedPosts = JSON.parse(savedPosts);
-      if (Array.isArray(parsedPosts)) return parsedPosts;
-    }
-  } catch (error) {
-    console.error('Failed to load locally saved blog posts:', error);
-  }
-
-  return initialPosts || [];
-}
-
 export default function BlogSection({ selectedPostId, onSelectPost, onPostsChange }) {
-  const [posts, setPosts] = useState(loadPosts);
-  const [isAdmin, setIsAdmin] = useState(
-    () => sessionStorage.getItem(BLOG_CONFIG.adminStorageKey) === 'true',
-  );
+  const [posts, setPosts] = useState(initialPosts || []);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -56,18 +44,28 @@ export default function BlogSection({ selectedPostId, onSelectPost, onPostsChang
     onPostsChange?.(posts);
   }, [posts, onPostsChange]);
 
+  useEffect(() => onAuthStateChanged(firebaseAuth, user => {
+    setIsAdmin(user?.email === BLOG_CONFIG.adminEmail);
+  }), []);
+
+  useEffect(() => subscribeToBlogPosts(({ initialized, posts: remotePosts }) => {
+    setPosts(initialized ? remotePosts : (initialPosts || []));
+    setIsLoadingPosts(false);
+  }, error => {
+    console.error('Failed to load blog posts from Firebase:', error);
+    setIsLoadingPosts(false);
+  }), []);
+
   const savePosts = async nextPosts => {
+    const previousPosts = posts;
     setPosts(nextPosts);
 
     try {
-      localStorage.setItem(BLOG_CONFIG.postsStorageKey, JSON.stringify(nextPosts));
-      await fetch(BLOG_CONFIG.saveEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ posts: nextPosts }),
-      });
+      await replaceBlogPosts(nextPosts, previousPosts);
     } catch (error) {
-      console.error('Failed to sync blog posts to the server:', error);
+      setPosts(previousPosts);
+      console.error('Failed to save blog posts to Firebase:', error);
+      throw error;
     }
   };
 
@@ -82,34 +80,25 @@ export default function BlogSection({ selectedPostId, onSelectPost, onPostsChang
     setLoginError('');
 
     try {
-      const response = await fetch(BLOG_CONFIG.loginEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: passwordInput }),
-      });
-
-      if (!response.ok) {
-        const result = await response.json();
-        setLoginError(result.error || 'Unable to log in.');
-        return;
-      }
-
-      setIsAdmin(true);
-      sessionStorage.setItem(BLOG_CONFIG.adminStorageKey, 'true');
+      await signInWithEmailAndPassword(
+        firebaseAuth,
+        BLOG_CONFIG.adminEmail,
+        passwordInput,
+      );
       closeLoginModal();
     } catch (error) {
       console.error('Failed to log in:', error);
-      setLoginError('Unable to connect to the local blog server.');
+      setLoginError('Incorrect password or Firebase Authentication is not configured yet.');
     }
   };
 
-  const handleLogout = () => {
-    fetch(BLOG_CONFIG.logoutEndpoint, { method: 'POST' }).catch(error => {
-      console.error('Failed to close the blog session:', error);
-    });
-    setIsAdmin(false);
-    sessionStorage.removeItem(BLOG_CONFIG.adminStorageKey);
-    setIsEditing(false);
+  const handleLogout = async () => {
+    try {
+      await signOut(firebaseAuth);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Failed to log out:', error);
+    }
   };
 
   const resetEditorState = () => {
@@ -151,15 +140,20 @@ export default function BlogSection({ selectedPostId, onSelectPost, onPostsChang
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleDeletePost = (postId, event) => {
+  const handleDeletePost = async (postId, event) => {
     event?.stopPropagation();
     if (!window.confirm('Are you sure you want to delete this blog post?')) return;
 
-    savePosts(posts.filter(post => post.id !== postId));
-    if (selectedPostId === postId) onSelectPost(null);
+    try {
+      await savePosts(posts.filter(post => post.id !== postId));
+      if (selectedPostId === postId) onSelectPost(null);
+    } catch {
+      setSaveSuccessMsg('Unable to delete this post. Check Firebase permissions.');
+      window.setTimeout(() => setSaveSuccessMsg(''), 5000);
+    }
   };
 
-  const handleSavePost = event => {
+  const handleSavePost = async event => {
     event.preventDefault();
     if (!formData.title.trim()) {
       setFormError('Add a title before publishing this post.');
@@ -187,11 +181,15 @@ export default function BlogSection({ selectedPostId, onSelectPost, onPostsChang
       ? posts.map(currentPost => currentPost.id === editingPostId ? post : currentPost)
       : [post, ...posts];
 
-    savePosts(nextPosts);
-    resetEditorState();
-    onSelectPost(post);
-    setSaveSuccessMsg('Post saved successfully.');
-    window.setTimeout(() => setSaveSuccessMsg(''), 4000);
+    try {
+      await savePosts(nextPosts);
+      resetEditorState();
+      onSelectPost(post);
+      setSaveSuccessMsg('Post saved successfully.');
+      window.setTimeout(() => setSaveSuccessMsg(''), 4000);
+    } catch {
+      setFormError('Unable to save this post. Check Firebase permissions and try again.');
+    }
   };
 
   const insertMarkdown = (prefix, suffix = '', fallbackText = 'text', prefixEachLine = false) => {
@@ -275,7 +273,9 @@ export default function BlogSection({ selectedPostId, onSelectPost, onPostsChang
 
       {saveSuccessMsg && <div className="blog-save-success" role="status">{saveSuccessMsg}</div>}
 
-      {isEditing ? (
+      {isLoadingPosts && <p className="blog-loading">Loading posts...</p>}
+
+      {!isLoadingPosts && (isEditing ? (
         <BlogEditor
           categories={categories}
           contentInputRef={contentInputRef}
@@ -312,7 +312,7 @@ export default function BlogSection({ selectedPostId, onSelectPost, onPostsChang
           onSelectPost={onSelectPost}
           onStartNewPost={startNewPost}
         />
-      )}
+      ))}
     </section>
   );
 }
