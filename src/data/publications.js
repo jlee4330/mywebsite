@@ -1,0 +1,83 @@
+// Add newest publications at the top. Image and document paths point to /public.
+export const PUBLICATIONS = [
+  {
+    tag: 'P.2',
+    firstAuthor: true,
+    title: 'DioramaCraft: A Human-AI Workflow for Transforming Personal Photographs into Layered Paper Theater Dioramas',
+    authors: ['Guhn Lee*', 'Heejin Kim*', 'Jiyoon Lee*', 'Donggun Lee*', 'Tak Yeon Lee'],
+    venue: 'ACM UIST 2026 Poster',
+    teaser: '/dioramacraft.jpg',
+    links: [{ label: 'Video', url: 'https://www.youtube.com/watch?v=taP70ew_IzE' }],
+  },
+  {
+    tag: 'P.1',
+    firstAuthor: true,
+    title: 'One Is Not Enough: How People Use Multiple AI Models in Everyday Life',
+    authors: ['Seunghwa Pyo*', 'Donggun Lee*', 'Jungwoo Rhee*', 'Soobin Park', 'Youn-kyung Lim'],
+    venue: 'ACM CHI EA 2026',
+    teaser: '/chiposter26.png',
+    links: [
+      { label: 'DOI', url: 'https://doi.org/10.1145/3772363.3798682' },
+      { label: 'PDF', url: '/3772363.3798682.pdf' },
+      { label: 'Poster', url: '/Poster.pdf' },
+    ],
+  },
+  {
+    tag: 'C.2',
+    title: 'Evaluating Visual Prompts with Eye-Tracking Data for MLLM-Based Human Activity Recognition',
+    authors: ['Jae Young Choi', 'Seon Gyeom Kim', 'Hyungjun Yoon', 'Taeckyung Lee', 'Donggun Lee', 'Jaeryung Chung', 'Jihyung Kil', 'Ryan Rossi', 'Sung-Ju Lee', 'Tak Yeon Lee'],
+    venue: 'IEEE PacificVis 2026',
+    teaser: '/pacificvis26.png',
+    links: [
+      { label: 'DOI', url: 'https://doi.org/10.48550/arXiv.2604.09585' },
+      { label: 'PDF', url: '/Evaluating Visual Prompts with Eye-Tracking Data for MLLM–Based Human Activity Recognition.pdf' },
+    ],
+  },
+  {
+    tag: 'J.4',
+    firstAuthor: true,
+    title: 'Creating Text-Based AI Clones of Myself: Exploring Perceptions, Development Strategies, and Challenges',
+    authors: ['Donggun Lee*', 'Suyoun Lee*', 'Hyunseung Lim', 'Hwajung Hong'],
+    venue: 'International Journal of Human–Computer Studies (IJHCS), 103692. Special Issue: "AI-Generated Personas: Representing User Needs with Generative AI Models."',
+    teaser: '/ijhcs4_web.jpg',
+    teaserClassName: 'pub-entry-image--ijhcs',
+    links: [
+      { label: 'DOI', url: 'https://doi.org/10.1016/j.ijhcs.2025.103692' },
+      { label: 'PDF', url: '/clone.pdf' },
+    ],
+  },
+  {
+    tag: 'J.3',
+    title: 'Understanding the Impact of Spatial Immersion in Web Data Stories',
+    authors: ['SeonGyeom Kim', 'Juhyeong Park', 'Yutaek Song', 'Donggun Lee', 'Yubin Lee', 'Ryan Rossi', 'Jane Hoffswell', 'Eunyee Koh', 'Tak Yeon Lee'],
+    venue: 'Preprint (Under Revision)',
+    teaser: '/Immersive.jpg',
+    links: [
+      { label: 'DOI', url: 'https://doi.org/10.48550/arXiv.2411.18049' },
+      { label: 'PDF', url: '/ids.pdf' },
+    ],
+  },
+  {
+    tag: 'J.2',
+    title: 'The Impact of a Meditation Camp on Emotional Regulation and Abstinence Intentions in Individuals with Gambling Addiction',
+    authors: ['Sanghee Cho', 'Sangseong Kim', 'Donggun Lee', 'Junggi Hong', 'Eunmi Kim'],
+    venue: 'Korean Journal of Meditation 2025, Vol. 15, No. 1, pp.105-117',
+    teaser: '/meditation.jpg',
+    links: [
+      { label: 'DOI', url: 'https://doi.org/10.23250/kjm.15.1.202502.006' },
+      { label: 'PDF', url: '/med.pdf' },
+    ],
+  },
+  {
+    tag: 'C.1',
+    firstAuthor: true,
+    title: 'Pokemon Color Adjustments for Augmented Reality Contents',
+    authors: ['Donggun Lee', 'Taesu Kim', 'Hyeon-Jeong Suk'],
+    venue: "Electronic Imaging (IS&T International Symposium on Electronic Imaging 2022)",
+    teaser: '/EI2022.png',
+    links: [
+      { label: 'DOI', url: 'https://doi.org/10.2352/EI.2022.34.15.COLOR-377' },
+      { label: 'PDF', url: '/pokemon.pdf' },
+    ],
+  },
+];
