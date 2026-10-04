@@ -326,6 +326,15 @@ a:hover {
   max-width: 65%;
 }
 
+.left-column--full {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+.main-layout--full {
+  gap: 0;
+}
+
 .right-column {
   flex: 0 0 calc(35% - 40px);
   max-width: calc(35% - 40px);
@@ -614,6 +623,7 @@ body.dark-mode .hero-image.hero-static-image {
   display: block;
   margin-bottom: 4px;
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .pub-entry-authors {
@@ -1873,6 +1883,10 @@ body.dark-mode .hero-image.hero-static-image {
   .right-column {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .pub-entry-title {
+    white-space: normal;
   }
 
   .top-nav {

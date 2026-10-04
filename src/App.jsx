@@ -37,27 +37,34 @@ function App() {
       />
       <SiteNavigation activeTab={activeTab} onNavigate={navigateTo} />
 
-      <div className="main-layout">
-        <main className="left-column">
-          {activeTab === 'about' && <AboutSection />}
-          {activeTab === 'publications' && <PublicationsSection />}
-          {activeTab === 'projects' && <ProjectsSection />}
-          {activeTab === 'blog' && (
-            <BlogSection
-              selectedPostId={selectedBlogPostId}
-              onSelectPost={post => setSelectedBlogPostId(post ? post.id : null)}
-              onPostsChange={setBlogPosts}
-            />
-          )}
-        </main>
+      {(() => {
+        const hasSidebar = activeTab === 'about' || activeTab === 'blog';
+        return (
+          <div className={`main-layout ${!hasSidebar ? 'main-layout--full' : ''}`}>
+            <main className={`left-column ${!hasSidebar ? 'left-column--full' : ''}`}>
+              {activeTab === 'about' && <AboutSection />}
+              {activeTab === 'publications' && <PublicationsSection />}
+              {activeTab === 'projects' && <ProjectsSection />}
+              {activeTab === 'blog' && (
+                <BlogSection
+                  selectedPostId={selectedBlogPostId}
+                  onSelectPost={post => setSelectedBlogPostId(post ? post.id : null)}
+                  onPostsChange={setBlogPosts}
+                />
+              )}
+            </main>
 
-        <aside className="right-column">
-          {activeTab === 'about' && <NewsSidebar />}
-          {activeTab === 'blog' && (
-            <BlogSidebar posts={blogPosts} onSelectPost={setSelectedBlogPostId} />
-          )}
-        </aside>
-      </div>
+            {hasSidebar && (
+              <aside className="right-column">
+                {activeTab === 'about' && <NewsSidebar />}
+                {activeTab === 'blog' && (
+                  <BlogSidebar posts={blogPosts} onSelectPost={setSelectedBlogPostId} />
+                )}
+              </aside>
+            )}
+          </div>
+        );
+      })()}
 
       <SiteFooter />
     </div>

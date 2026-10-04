@@ -50,7 +50,7 @@ export default function PublicationsSection() {
       {visiblePublications.map(publication => (
         <div key={publication.tag} className="pub-entry">
           <div className="pub-entry-body">
-            <span className="pub-entry-title">{publication.title}</span>
+            <span className="pub-entry-title" title={publication.title}>{publication.title}</span>
             <span className="pub-entry-authors"><AuthorList authors={publication.authors} /></span>
             <span className="pub-entry-venue">{publication.venue}</span>
             {publication.links.length > 0 && (
